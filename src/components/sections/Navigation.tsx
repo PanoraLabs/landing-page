@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const navLinks = [
   { href: "#pilar", label: "Ekosistem" },
-  { href: "#cara-kerja", label: "Cara Kerja" },
-  { href: "#persona", label: "Untuk Siapa" },
-  { href: "#tech", label: "Teknologi" },
-];
+  { href: "#cara-kerja", label: "Sistem" },
+  { href: "#persona", label: "Pengguna" },
+  { href: "#tech", label: "Infrastruktur" },
+] as const;
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,79 +29,86 @@ export function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.17, 0.67, 0.83, 0.67] }}
-        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-[60px] py-5 flex items-center justify-between border-b transition-all duration-300 ${
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-[60px] py-4 flex items-center justify-between border-b transition-all duration-200 ${
           isScrolled
-            ? "bg-[#1a1208]/95 border-[rgba(245,230,192,0.12)] backdrop-blur-xl"
-            : "bg-gradient-to-b from-[rgba(26,18,8,0.95)] to-transparent border-[rgba(245,230,192,0.06)]"
+            ? "bg-[#F9FAFB]/95 border-[#E5E7EB]"
+            : "bg-[#F9FAFB] border-[#E5E7EB]"
         }`}
       >
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3 no-underline group">
-          <motion.div
-            className="w-9 h-9 bg-[#d4a017] hex-clip flex items-center justify-center text-[#1a1208] font-bold text-sm animate-hex-pulse"
-            whileHover={{ scale: 1.05 }}
-          >
-            P
-          </motion.div>
-          <span className="font-[var(--font-playfair)] text-xl font-bold tracking-[0.12em] text-[#f5e6c0] hidden sm:inline">
-            PANORA
-          </span>
+        {/* Logo Image */}
+        <a href="#" className="flex items-center gap-3 no-underline">
+          <Image
+            src="/logo.png"
+            alt="Panora"
+            width={180}
+            height={48}
+            className="h-12 w-auto"
+            priority
+          />
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-9">
+        {/* Desktop Navigation - Inter, sentence case */}
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <motion.a
+            <a
               key={link.href}
               href={link.href}
-              className="font-[var(--font-dm-mono)] text-[11px] tracking-[0.15em] uppercase text-[#c8b67a] no-underline hover:text-[#f0be2a] transition-colors duration-200"
-              whileHover={{ y: -2 }}
+              className="font-[family-name:var(--font-inter)] text-[12px] font-medium tracking-[0.02em] text-[#6B7280] no-underline hover:text-[#111827] transition-colors duration-150"
             >
               {link.label}
-            </motion.a>
+            </a>
           ))}
-          <Button variant="nav" size="sm" asChild>
-            <a href="#daftar">Mulai Sekarang</a>
-          </Button>
+        </div>
+
+        {/* CTA Button - Inter, sentence case */}
+        <div className="hidden lg:block">
+          <a
+            href="#daftar"
+            className="inline-flex items-center justify-center h-9 px-5 bg-[#FF6B00] text-white font-[family-name:var(--font-inter)] text-[11px] font-semibold tracking-[0.02em] no-underline hover:bg-[#E55F00] transition-colors duration-150"
+          >
+            Minta akses
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-[#f5e6c0] p-2"
+          className="lg:hidden text-[#111827] p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Inter, sentence case */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-[73px] left-0 right-0 z-40 bg-[#1a1208]/98 border-b border-[rgba(245,230,192,0.12)] backdrop-blur-xl lg:hidden"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-[57px] left-0 right-0 z-40 bg-[#F9FAFB] border-b border-[#E5E7EB] lg:hidden"
           >
-            <div className="flex flex-col p-6 gap-4">
+            <div className="flex flex-col p-5 gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="font-[var(--font-dm-mono)] text-sm tracking-[0.15em] uppercase text-[#c8b67a] no-underline hover:text-[#f0be2a] transition-colors py-2"
+                  className="font-[family-name:var(--font-inter)] text-[13px] font-medium tracking-[0.02em] text-[#6B7280] no-underline hover:text-[#111827] transition-colors py-3"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <Button variant="nav" size="default" asChild className="mt-4">
-                <a href="#daftar" onClick={() => setIsMobileMenuOpen(false)}>
-                  Mulai Sekarang
-                </a>
-              </Button>
+              <a
+                href="#daftar"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center h-10 px-5 bg-[#FF6B00] text-white font-[family-inter] text-[11px] font-semibold tracking-[0.02em] no-underline hover:bg-[#E55F00] transition-colors duration-150 mt-3"
+              >
+                Minta akses
+              </a>
             </div>
           </motion.div>
         )}

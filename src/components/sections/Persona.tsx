@@ -1,84 +1,58 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView, Variants } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const personas = [
   {
-    role: "Persona 01",
-    emoji: "🌾",
-    name: "Petani",
-    desc: "Akses langsung ke pasar, subsidi digital, dan pembiayaan berbasis hasil panen nyata tanpa agunan tradisional.",
-    benefits: [
-      "Daftarkan estimasi panen",
-      "Terima voucher subsidi pupuk/benih",
-      "Ajukan pinjaman via pNFT",
-      "Langsung terhubung pembeli",
+    role: "Petani",
+    id: "01",
+    name: "Petani & pekebun",
+    desc: "Akses langsung ke pasar dengan harga yang jelas dan terjamin. Bantuan subsidi untuk kebutuhan produksi melalui aplikasi.",
+    capabilities: [
+      "Pendaftaran hasil panen",
+      "Penukaran kupon subsidi",
+      "Pembiayaan dengan jaminan digital",
+      "Koneksi langsung ke pembeli",
     ],
-    cta: "Daftar Petani",
   },
   {
-    role: "Persona 02",
-    emoji: "🏛️",
-    name: "Koperasi & Gudang",
-    desc: "Kelola stok, tokenisasi aset fisik jadi instrumen keuangan digital, dan pantau seluruh anggota dalam satu dashboard.",
-    benefits: [
-      "Mint pNFT dari stok gudang",
-      "Monitor anggota & subsidi",
-      "Audit trail on-chain",
-      "Integrasi DeFi langsung",
+    role: "Koperasi",
+    id: "02",
+    name: "Koperasi & gudang",
+    desc: "Manajemen stok dengan sertifikat digital. Pelacakan anggota dan administrasi subsidi terintegrasi.",
+    capabilities: [
+      "Penerbitan sertifikat gudang",
+      "Manajemen anggota & subsidi",
+      "Jejak audit digital",
+      "Integrasi sistem keuangan",
     ],
-    cta: "Daftar Koperasi",
   },
   {
-    role: "Persona 03",
-    emoji: "🚛",
-    name: "Transporter",
-    desc: "Pantau armada real-time, otomatisasi klaim asuransi, dan maksimalkan pendapatan dengan Backload Optimizer.",
-    benefits: [
-      "IoT tracking suhu & GPS",
+    role: "Pengirim",
+    id: "03",
+    name: "Penyedia logistik",
+    desc: "Pemantauan armada real-time dengan verifikasi sensor. Klaim asuransi otomatis jika terjadi masalah.",
+    capabilities: [
+      "Pelacakan GPS & suhu",
       "Klaim asuransi otomatis",
-      "Backload trip optimization",
-      "Rating & reputasi on-chain",
+      "Optimasi rute",
+      "Penilaian reputasi digital",
     ],
-    cta: "Daftar Transporter",
   },
   {
-    role: "Persona 04",
-    emoji: "🏢",
-    name: "Pembeli B2B",
-    desc: "Akses langsung ke sumber komoditas terverifikasi, harga transparan berbasis oracle, dan jaminan kualitas dari IoT.",
-    benefits: [
-      "Browse supply seluruh Indonesia",
-      "Harga real-time via Pyth oracle",
-      "Tracking pengiriman live",
-      "Invoice & pembayaran otomatis",
+    role: "Pembeli",
+    id: "04",
+    name: "Pembeli enterprise",
+    desc: "Sumber komoditas terverifikasi dari seluruh Indonesia. Harga real-time berdasarkan data pasar.",
+    capabilities: [
+      "Pencarian pasokan multi-wilayah",
+      "Harga terverifikasi data pasar",
+      "Pelacakan pengiriman live",
+      "Tagihan otomatis",
     ],
-    cta: "Daftar Pembeli",
   },
 ];
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeOut",
-    },
-  },
-};
 
 export function Persona() {
   const ref = useRef(null);
@@ -88,91 +62,82 @@ export function Persona() {
     <section 
       id="persona" 
       ref={ref}
-      className="relative px-6 md:px-[60px] py-[120px]"
+      className="relative px-6 md:px-[60px] py-[80px] lg:py-[120px] bg-[#F9FAFB]"
     >
       {/* Section Header */}
       <motion.div 
-        className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-6"
-        initial={{ opacity: 0, y: 40 }}
+        className="mb-12 lg:mb-16"
+        initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.5 }}
       >
-        <div>
-          <div className="flex items-center gap-2.5 mb-4">
-            <span className="text-[#d4a017]">//</span>
-            <span className="font-[var(--font-dm-mono)] text-[11px] tracking-[0.25em] uppercase text-[#7ab648]">
-              Komunitas PANORA
-            </span>
-          </div>
-          <h2 className="font-[var(--font-playfair)] text-[clamp(36px,3.5vw,54px)] font-black leading-[1.1]">
-            Dibangun Untuk
-            <br />
-            <em className="text-[#d4a017] not-italic">Semua Pelaku</em>
-          </h2>
+        <div className="flex items-center gap-3 mb-4">
+          <span className="w-6 h-[1px] bg-[#111827]" />
+          <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase text-[#6B7280]">
+            Pengguna jaringan
+          </span>
         </div>
-        <p className="max-w-[400px] text-[15px] text-[#c8b67a] leading-[1.7]">
-          Satu platform, empat persona. Setiap pelaku rantai pasok
-          mendapat antarmuka dan fitur yang dirancang khusus untuk
-          kebutuhannya.
-        </p>
+        {/* H2 - SYNE, ALL CAPS */}
+        <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827]">
+          EMPAT KATEGORI PENGGUNA
+        </h2>
       </motion.div>
 
-      {/* Persona Grid */}
+      {/* Section Divider */}
+      <div className="h-[2px] bg-[#FF6B00] mb-12" />
+
+      {/* Persona Grid - 2x2 on desktop */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        className="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-[#111827]"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 0.1 }}
       >
-        {personas.map((persona) => (
+        {personas.map((persona, index) => (
           <motion.div
-            key={persona.role}
-            variants={itemVariants}
-            className="group border border-[rgba(245,230,192,0.12)] p-11 relative overflow-hidden transition-all duration-[350ms] hover:border-[rgba(212,160,23,0.5)] hover:-translate-y-1.5"
-            style={{
-              background: 'linear-gradient(135deg, rgba(44,31,14,0.5), rgba(26,18,8,0.8))',
-            }}
+            key={persona.id}
+            className="bg-white p-6 lg:p-8 hover:bg-[#F3F4F6] transition-colors"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.15 + 0.08 * index }}
           >
-            {/* Role */}
-            <div className="font-[var(--font-dm-mono)] text-[10px] tracking-[0.25em] uppercase text-[#7ab648] mb-5">
-              {persona.role}
+            {/* Role & ID */}
+            <div className="flex items-center justify-between mb-6">
+              <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#FF6B00]">
+                {persona.role}
+              </span>
+              <span className="font-[family-name:var(--font-syne)] text-[40px] font-bold text-[#E5E7EB] leading-none">
+                {persona.id}
+              </span>
             </div>
 
-            {/* Emoji */}
-            <span className="text-[44px] mb-5 block drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-              {persona.emoji}
-            </span>
-
-            {/* Name */}
-            <h3 className="font-[var(--font-playfair)] text-[22px] font-bold mb-3">
+            {/* Name - Inter, sentence case */}
+            <h3 className="font-[family-name:var(--font-inter)] text-base font-semibold text-[#111827] mb-3 tracking-[-0.01em]">
               {persona.name}
             </h3>
 
-            {/* Description */}
-            <p className="text-[13px] text-[#c8b67a] leading-[1.7] mb-7">
+            {/* Description - Inter, sentence case */}
+            <p className="font-[family-name:var(--font-inter)] text-[14px] text-[#374151] leading-[1.6] mb-6">
               {persona.desc}
             </p>
 
-            {/* Benefits */}
-            <ul className="flex flex-col gap-2 list-none mb-7">
-              {persona.benefits.map((benefit, i) => (
-                <li 
-                  key={i}
-                  className="text-xs text-[rgba(200,182,122,0.8)] flex items-start gap-2"
-                >
-                  <span className="text-[#7ab648] flex-shrink-0 mt-0.5">✓</span>
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <a
-              href="#daftar"
-              className="inline-block mt-7 px-6 py-2.5 border border-[rgba(212,160,23,0.4)] text-[#d4a017] font-[var(--font-dm-mono)] text-[11px] tracking-[0.15em] uppercase no-underline hover:bg-[#d4a017] hover:text-[#1a1208] hover:border-[#d4a017] transition-all duration-200 btn-clip-sm"
-            >
-              {persona.cta}
-            </a>
+            {/* Capabilities */}
+            <div className="border-t border-[#E5E7EB] pt-4">
+              <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#6B7280] mb-3">
+                Kemampuan utama
+              </div>
+              <ul className="space-y-2">
+                {persona.capabilities.map((cap, i) => (
+                  <li 
+                    key={i}
+                    className="font-[family-name:var(--font-inter)] text-[12px] text-[#374151] flex items-start gap-2"
+                  >
+                    <span className="text-[#FF6B00] flex-shrink-0 text-[10px] mt-0.5">→</span>
+                    {cap}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
         ))}
       </motion.div>

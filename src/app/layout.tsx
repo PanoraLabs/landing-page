@@ -1,30 +1,22 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Mono, Mulish } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const dmMono = DM_Mono({
-  variable: "--font-dm-mono",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-});
-
-const mulish = Mulish({
-  variable: "--font-mulish",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "PANORA — Backbone Digital Pangan Nasional",
-  description: "PANORA menyatukan arus barang, arus uang, dan arus data dalam satu infrastruktur blockchain — menghubungkan petani, koperasi, transporter, dan pembeli di seluruh Nusantara.",
-  keywords: ["blockchain", "food supply chain", "agriculture", "Indonesia", "Solana", "Web3"],
+  title: "PANORA — Infrastruktur Rantai Pasok Pangan Nasional",
+  description: "Visibilitas rantai pasok real-time di Indonesia. Transaksi terverifikasi blockchain untuk 180.000+ petani.",
 };
 
 export default function RootLayout({
@@ -35,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${playfair.variable} ${dmMono.variable} ${mulish.variable} h-full antialiased`}
+      className={`${syne.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#1a1208] text-[#f5e6c0] overflow-x-hidden grain-overlay">
+      <body className="min-h-full flex flex-col bg-[#F9FAFB] text-[#111827] overflow-x-hidden">
         {children}
       </body>
     </html>

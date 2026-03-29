@@ -3,12 +3,12 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const ctaButtons = [
-  { label: "Daftar sebagai Petani", variant: "default" as const },
-  { label: "Daftar sebagai Koperasi", variant: "outline" as const },
-  { label: "Daftar sebagai Transporter", variant: "outline" as const },
-  { label: "Daftar sebagai Pembeli B2B", variant: "outline" as const },
-];
+const accessTypes = [
+  { label: "Petani", desc: "Petani & pekebun" },
+  { label: "Koperasi", desc: "Gudang & koperasi" },
+  { label: "Pengirim", desc: "Penyedia logistik" },
+  { label: "Pembeli", desc: "Pembelian perusahaan" },
+] as const;
 
 export function CTA() {
   const ref = useRef(null);
@@ -18,84 +18,79 @@ export function CTA() {
     <section 
       id="daftar" 
       ref={ref}
-      className="relative px-6 md:px-[60px] py-[160px] text-center overflow-hidden"
+      className="relative px-6 md:px-[60px] py-[80px] lg:py-[120px] bg-[#F9FAFB]"
     >
-      {/* Background gradient */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)',
-        }}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7 }}
-        className="relative z-10"
-      >
-        {/* Badge */}
-        <motion.div 
-          className="inline-flex items-center gap-2 font-[var(--font-dm-mono)] text-[10px] tracking-[0.2em] uppercase text-[#7ab648] border border-[rgba(74,140,65,0.3)] px-5 py-2 mb-10"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.2, duration: 0.5 }}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[100px]">
+        {/* Left Column - Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
         >
-          <span className="w-1.5 h-1.5 bg-[#7ab648] rounded-full animate-blink" />
-          Registrasi Terbuka
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-6 h-[1px] bg-[#111827]" />
+            <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.2em] uppercase text-[#6B7280]">
+              Permintaan akses
+            </span>
+          </div>
+          {/* H2 - SYNE, ALL CAPS */}
+          <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827] mb-6">
+            AKSES PLATFORM
+          </h2>
+          <p className="font-[family-name:var(--font-inter)] text-[14px] text-[#374151] leading-[1.6] max-w-[400px]">
+            Bergabung dengan pengguna terverifikasi di infrastruktur rantai pasok pangan Indonesia.
+          </p>
         </motion.div>
 
-        {/* Title */}
-        <motion.h2 
-          className="font-[var(--font-playfair)] text-[clamp(42px,5vw,72px)] font-black leading-[1.05] mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          Jadilah Bagian
-          <br />
-          dari <em className="text-[#d4a017] not-italic">Revolusi</em>
-          <br />
-          Pangan Digital
-        </motion.h2>
-
-        {/* Subtitle */}
-        <motion.p 
-          className="text-[17px] text-[#c8b67a] max-w-[500px] mx-auto mb-15 leading-[1.7]"
+        {/* Right Column - Access Types */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
-          Bergabunglah dengan 180.000+ petani, koperasi, transporter, dan
-          pembeli yang sudah membangun ekosistem pangan Nusantara bersama
-          PANORA.
-        </motion.p>
+          {/* Access Types List */}
+          <div className="border border-[#111827] bg-white">
+            {accessTypes.map((type, index) => (
+              <motion.a
+                key={type.label}
+                href="#"
+                className={`flex items-center justify-between px-6 py-5 hover:bg-[#F3F4F6] transition-colors group ${
+                  index !== accessTypes.length - 1 ? "border-b border-[#E5E7EB]" : ""
+                }`}
+                initial={{ opacity: 0, x: 10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.2 + 0.08 * index, duration: 0.3 }}
+              >
+                <div>
+                  {/* H3 - Inter, sentence case */}
+                  <h3 className="font-[family-name:var(--font-inter)] text-[13px] font-semibold text-[#111827] tracking-[-0.01em]">
+                    {type.label}
+                  </h3>
+                  <div className="font-[family-name:var(--font-inter)] text-[12px] text-[#6B7280]">
+                    {type.desc}
+                  </div>
+                </div>
+                <span className="font-[family-name:var(--font-inter)] text-[11px] text-[#FF6B00] opacity-0 group-hover:opacity-100 transition-opacity">
+                  Minta →
+                </span>
+              </motion.a>
+            ))}
+          </div>
 
-        {/* CTA Buttons */}
-        <motion.div 
-          className="flex justify-center gap-4 flex-wrap"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          {ctaButtons.map((btn, index) => (
-            <motion.a
-              key={btn.label}
-              href="#"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-              className={`inline-flex items-center justify-center h-14 px-10 py-5 text-base font-medium whitespace-nowrap transition-all outline-none select-none ${
-                btn.variant === "default"
-                  ? "bg-[#d4a017] text-[#1a1208] hover:bg-[#f0be2a] btn-clip"
-                  : "border border-[#d4a017]/50 text-[#c8b67a] hover:border-[#d4a017] hover:text-[#d4a017] btn-clip"
-              }`}
+          {/* Enterprise Contact */}
+          <div className="mt-6 border border-[#E5E7EB] px-6 py-4 bg-white">
+            <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#6B7280] mb-1">
+              Pertanyaan enterprise
+            </div>
+            <a 
+              href="mailto:enterprise@panora.id"
+              className="font-[family-name:var(--font-inter)] text-[14px] text-[#111827] hover:text-[#FF6B00] transition-colors"
             >
-              {btn.label}
-            </motion.a>
-          ))}
+              enterprise@panora.id
+            </a>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
