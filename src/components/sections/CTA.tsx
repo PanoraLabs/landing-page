@@ -4,10 +4,10 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const accessTypes = [
-  { label: "Petani", desc: "Petani & pekebun" },
-  { label: "Koperasi", desc: "Gudang & koperasi" },
-  { label: "Pengirim", desc: "Penyedia logistik" },
-  { label: "Pembeli", desc: "Pembelian perusahaan" },
+  { label: "Petani", desc: "Petani & pekebun", url: "https://panora-petani-app.vercel.app/" },
+  { label: "Koperasi", desc: "Gudang & koperasi", url: "https://panora-gudang-app.vercel.app/" },
+  { label: "Pengirim", desc: "Penyedia logistik", url: "https://panora-transporter-app.vercel.app/" },
+  { label: "Pembeli", desc: "Pembelian perusahaan", url: "https://panora-buyer-app.vercel.app/" },
 ] as const;
 
 export function CTA() {
@@ -33,9 +33,9 @@ export function CTA() {
               Permintaan akses
             </span>
           </div>
-          {/* H2 - SYNE, ALL CAPS */}
-          <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827] mb-6">
-            AKSES PLATFORM
+          {/* H2 - Satoshi, title case */}
+          <h2 className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3.5vw,40px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827] mb-6">
+            Akses Platform
           </h2>
           <p className="font-[family-name:var(--font-inter)] text-[14px] text-[#374151] leading-[1.6] max-w-[400px]">
             Bergabung dengan pengguna terverifikasi di infrastruktur rantai pasok pangan Indonesia.
@@ -53,7 +53,9 @@ export function CTA() {
             {accessTypes.map((type, index) => (
               <motion.a
                 key={type.label}
-                href="#"
+                href={type.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`flex items-center justify-between px-6 py-5 hover:bg-[#F3F4F6] transition-colors group ${
                   index !== accessTypes.length - 1 ? "border-b border-[#E5E7EB]" : ""
                 }`}

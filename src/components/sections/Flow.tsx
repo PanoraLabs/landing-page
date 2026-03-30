@@ -54,9 +54,9 @@ export function Flow() {
             Alur sistem
           </span>
         </div>
-        {/* H2 - SYNE, ALL CAPS */}
-        <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827]">
-          ALUR TRANSAKSI
+        {/* H2 - Satoshi, title case */}
+        <h2 className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3.5vw,40px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827]">
+          Alur Transaksi
         </h2>
       </motion.div>
 
@@ -88,7 +88,7 @@ export function Flow() {
               <div className="border border-[#111827] bg-white relative z-10 h-full">
                 {/* Step Header */}
                 <div className="border-b border-[#E5E7EB] px-4 py-3 flex items-center justify-between bg-[#F9FAFB]">
-                  <span className="font-[family-name:var(--font-syne)] text-base font-bold text-[#111827]">
+                  <span className="font-[family-name:var(--font-satoshi)] text-base font-bold text-[#111827]">
                     {step.num}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ export function Flow() {
           >
             <div className="grid grid-cols-12">
               <div className="col-span-2 border-r border-[#E5E7EB] px-3 py-4 flex items-start justify-center bg-[#F9FAFB]">
-                <span className="font-[family-name:var(--font-syne)] text-xl font-bold text-[#111827]">
+                <span className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-[#111827]">
                   {step.num}
                 </span>
               </div>

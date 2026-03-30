@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 
 const techStack = [
   { category: "Smart Contract", technology: "Anchor Framework", status: "Produksi" },
@@ -13,11 +13,55 @@ const techStack = [
 ] as const;
 
 const networkMetrics = [
-  { label: "TPS", value: "65.000", unit: "teoritis" },
-  { label: "Biaya rata-rata", value: "$0.00025", unit: "per transaksi" },
-  { label: "Waktu blok", value: "400", unit: "md" },
-  { label: "Operasional", value: "99.9", unit: "%" },
+  { label: "TPS", value: 65000, prefix: "", suffix: "", decimals: 0, unit: "teoritis" },
+  { label: "Biaya rata-rata", value: 0.00025, prefix: "$", suffix: "", decimals: 5, unit: "per transaksi" },
+  { label: "Waktu blok", value: 400, prefix: "", suffix: "", decimals: 0, unit: "md" },
+  { label: "Operasional", value: 99.9, prefix: "", suffix: "%", decimals: 1, unit: "" },
 ] as const;
+
+function AnimatedNumber({ 
+  value, 
+  prefix = "", 
+  suffix = "", 
+  decimals = 0 
+}: { 
+  value: number; 
+  prefix?: string; 
+  suffix?: string; 
+  decimals?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const count = useMotionValue(0);
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, value, {
+        duration: 2,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [isInView, value, count]);
+
+  useEffect(() => {
+    const unsubscribe = count.on("change", (latest) => {
+      if (decimals > 0) {
+        setDisplayValue(latest.toFixed(decimals));
+      } else {
+        setDisplayValue(Math.round(latest).toLocaleString("id-ID"));
+      }
+    });
+    return unsubscribe;
+  }, [count, decimals]);
+
+  return (
+    <span ref={ref}>
+      {prefix}{displayValue}{suffix}
+    </span>
+  );
+}
 
 export function Tech() {
   const ref = useRef(null);
@@ -51,9 +95,9 @@ export function Tech() {
               Infrastruktur
             </span>
           </div>
-          {/* H2 - SYNE, ALL CAPS */}
-          <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-white mb-6">
-            BLOCKCHAIN SOLANA
+          {/* H2 - Satoshi, title case */}
+          <h2 className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3.5vw,40px)] font-bold leading-[1.1] tracking-[-0.02em] text-white mb-6">
+            Blockchain Solana
           </h2>
           <p className="font-[family-name:var(--font-inter)] text-[14px] text-[#9CA3AF] leading-[1.6] max-w-[400px] mb-10">
             Dipilih karena kapasitas 65.000 TPS dan biaya transaksi hampir nol. 
@@ -132,8 +176,13 @@ export function Tech() {
                     {metric.label}
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-[family-name:var(--font-syne)] text-[28px] font-bold text-white tracking-[-0.02em]">
-                      {metric.value}
+                    <span className="font-[family-name:var(--font-satoshi)] text-[28px] font-bold text-white tracking-[-0.02em]">
+                      <AnimatedNumber 
+                        value={metric.value} 
+                        prefix={metric.prefix}
+                        suffix={metric.suffix}
+                        decimals={metric.decimals}
+                      />
                     </span>
                     <span className="font-[family-name:var(--font-inter)] text-xs text-[#6B7280]">
                       {metric.unit}
@@ -155,7 +204,7 @@ export function Tech() {
                 Live
               </span>
             </div>
-            <div className="font-[family-name:var(--font-syne)] text-[48px] font-bold text-white leading-none tracking-[-0.02em]">
+            <div className="font-[family-name:var(--font-satoshi)] text-[48px] font-bold text-white leading-none tracking-[-0.02em]">
               {currentTps.toLocaleString('id-ID')}
             </div>
             <div className="font-[family-name:var(--font-inter)] text-[11px] text-[#6B7280] mt-2">

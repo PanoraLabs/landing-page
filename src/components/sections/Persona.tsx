@@ -77,9 +77,9 @@ export function Persona() {
             Pengguna jaringan
           </span>
         </div>
-        {/* H2 - SYNE, ALL CAPS */}
-        <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827]">
-          EMPAT KATEGORI PENGGUNA
+        {/* H2 - Satoshi, title case */}
+        <h2 className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3.5vw,40px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827]">
+          Empat Kategori Pengguna
         </h2>
       </motion.div>
 
@@ -106,7 +106,7 @@ export function Persona() {
               <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#FF6B00]">
                 {persona.role}
               </span>
-              <span className="font-[family-name:var(--font-syne)] text-[40px] font-bold text-[#E5E7EB] leading-none">
+              <span className="font-[family-name:var(--font-satoshi)] text-[40px] font-bold text-[#E5E7EB] leading-none">
                 {persona.id}
               </span>
             </div>

@@ -65,9 +65,9 @@ export function Pilar() {
             Modul ekosistem
           </span>
         </div>
-        {/* H2 - SYNE, ALL CAPS, Extra Bold */}
-        <h2 className="font-[family-name:var(--font-syne)] text-[clamp(28px,3.5vw,40px)] font-extrabold leading-[1.1] tracking-[-0.03em] text-[#111827]">
-          INFRASTRUKTUR TERPADU
+        {/* H2 - Satoshi, title case */}
+        <h2 className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3.5vw,40px)] font-bold leading-[1.1] tracking-[-0.02em] text-[#111827]">
+          Infrastruktur Terpadu
         </h2>
       </motion.div>
 
@@ -93,7 +93,7 @@ export function Pilar() {
           >
             {/* Module Number & ID */}
             <div className="lg:col-span-2 p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] bg-[#F3F4F6]">
-              <div className="font-[family-name:var(--font-syne)] text-[48px] font-bold text-[#E5E7EB] leading-none">
+              <div className="font-[family-name:var(--font-satoshi)] text-[48px] font-bold text-[#E5E7EB] leading-none">
                 {pilar.number}
               </div>
               <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#FF6B00] mt-2">

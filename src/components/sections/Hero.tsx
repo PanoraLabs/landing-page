@@ -1,19 +1,85 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "framer-motion";
+import { useRef, useEffect } from "react";
 
 const heroStats = [
-  { num: "34", label: "Provinsi" },
-  { num: "180K+", label: "Petani terdaftar" },
-  { num: "2.1T", label: "Volume transaksi (IDR)" },
-  { num: "99.9%", label: "Operasional" },
+  { num: 34, suffix: "", label: "Provinsi" },
+  { num: 180, suffix: "K+", label: "Petani terdaftar" },
+  { num: 2.1, suffix: "T", label: "Volume transaksi (IDR)", decimals: 1 },
+  { num: 99.9, suffix: "%", label: "Operasional", decimals: 1 },
 ];
 
 const systemMetrics = [
-  { label: "Transaksi aktif", value: "2,847", unit: "Hari ini" },
-  { label: "Stok terpantau", value: "18.4K", unit: "Ton" },
-  { label: "Waktu penyelesaian", value: "0.4s", unit: "Rata-rata" },
+  { label: "Transaksi aktif", value: 2847, suffix: "", unit: "Hari ini" },
+  {
+    label: "Stok terpantau",
+    value: 18.4,
+    suffix: "K",
+    unit: "Ton",
+    decimals: 1,
+  },
+  {
+    label: "Waktu penyelesaian",
+    value: 0.4,
+    suffix: "s",
+    unit: "Rata-rata",
+    decimals: 1,
+  },
 ];
+
+function AnimatedNumber({
+  value,
+  suffix = "",
+  decimals = 0,
+}: {
+  value: number;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => {
+    if (decimals > 0) {
+      return latest.toFixed(decimals);
+    }
+    return Math.round(latest).toLocaleString("id-ID");
+  });
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, value, {
+        duration: 2,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [isInView, value, count]);
+
+  useEffect(() => {
+    const unsubscribe = rounded.on("change", (latest) => {
+      setDisplayValue(String(latest));
+    });
+    return unsubscribe;
+  }, [rounded]);
+
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+}
+
+import { useState } from "react";
 
 export function Hero() {
   return (
@@ -33,11 +99,11 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Headline - SYNE, ALL CAPS, Extra Bold */}
-        <h1 className="font-[family-name:var(--font-syne)] text-[clamp(36px,4.5vw,56px)] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#111827] mb-8">
-          Satu Ekosistem
+        {/* Headline - Satoshi (Space Grotesk), lowercase, geometric, authoritative */}
+        <h1 className="font-[family-name:var(--font-satoshi)] text-[clamp(36px,4.5vw,56px)] font-bold leading-[1.05] tracking-[-0.02em] text-[#111827] mb-8 lowercase">
+          satu ekosistem
           <br />
-          Seluruh Rantai Pangan
+          seluruh rantai pangan
         </h1>
 
         {/* Description - Inter, sentence case, generous line height */}
@@ -93,8 +159,12 @@ export function Hero() {
                   {metric.label}
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-[family-name:var(--font-syne)] text-[28px] font-bold text-[#111827] leading-none">
-                    {metric.value}
+                  <span className="font-[family-name:var(--font-satoshi)] text-[28px] font-bold text-[#111827] leading-none">
+                    <AnimatedNumber
+                      value={metric.value}
+                      suffix={metric.suffix}
+                      decimals={metric.decimals}
+                    />
                   </span>
                   <span className="font-[family-name:var(--font-inter)] text-xs text-[#9CA3AF]">
                     {metric.unit}
@@ -133,8 +203,12 @@ export function Hero() {
                 i >= 2 ? "border-t lg:border-t-0 border-[#E5E7EB]" : ""
               }`}
             >
-              <div className="font-[family-name:var(--font-syne)] text-[clamp(28px,3vw,40px)] font-bold text-[#111827] leading-none tracking-[-0.02em]">
-                {stat.num}
+              <div className="font-[family-name:var(--font-satoshi)] text-[clamp(28px,3vw,40px)] font-bold text-[#111827] leading-none tracking-[-0.02em]">
+                <AnimatedNumber
+                  value={stat.num}
+                  suffix={stat.suffix}
+                  decimals={stat.decimals}
+                />
               </div>
               <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#6B7280] mt-2">
                 {stat.label}

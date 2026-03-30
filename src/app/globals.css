@@ -1,5 +1,5 @@
-/* Google Fonts Import - Syne for headlines, Inter for body */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Typography: Satoshi (Space Grotesk) for headlines, Inter for body */
+/* Loaded via next/font/google in layout.tsx */
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -10,10 +10,18 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Syne', sans-serif;
+  --font-sans: var(--font-inter), 'Inter', sans-serif;
+  --font-heading: var(--font-satoshi), 'Space Grotesk', sans-serif;
 
-  /* PANORA B2B Color System */
+  /* PANORA Color System - Refined Palette */
+  --color-canvas: #F9FAFB;
+  --color-horizon: #F3F4F6;
+  --color-flare: #FF6B00;
+  --color-coral: #F27D52;
+  --color-obsidian: #111827;
+  --color-teal: #0eDDD2;
+  
+  /* Legacy mappings for compatibility */
   --color-bg-primary: #F9FAFB;
   --color-bg-secondary: #F3F4F6;
   --color-text-primary: #111827;
@@ -21,7 +29,7 @@
   --color-text-secondary: #374151;
   --color-accent: #FF6B00;
   --color-accent-hover: #E55F00;
-  --color-interactive: #00D1FF;
+  --color-interactive: #0eDDD2;
   --color-border: #111827;
   --color-border-light: #E5E7EB;
 
@@ -66,7 +74,7 @@
 }
 
 :root {
-  /* PANORA Light Theme - B2B Enterprise */
+  /* PANORA Light Theme - Refined Palette */
   --background: #F9FAFB;
   --foreground: #111827;
   --card: #FFFFFF;
@@ -79,14 +87,14 @@
   --secondary-foreground: #111827;
   --muted: #F3F4F6;
   --muted-foreground: #6B7280;
-  --accent: #00D1FF;
+  --accent: #0eDDD2;
   --accent-foreground: #111827;
   --destructive: #DC2626;
   --border: #111827;
   --input: #E5E7EB;
   --ring: #FF6B00;
   --chart-1: #FF6B00;
-  --chart-2: #00D1FF;
+  --chart-2: #0eDDD2;
   --chart-3: #111827;
   --chart-4: #6B7280;
   --chart-5: #F3F4F6;
@@ -131,13 +139,13 @@
     background-image: none;
   }
 
-  /* SYNE: PRIMARY FONT - ONLY for logotype, main headlines, slide titles, large callouts
-   * Rules: ALWAYS ALL CAPS, tight letter spacing */
+  /* SATOSHI: PRIMARY FONT - Headlines and branding
+   * Modern, geometric, authoritative. Title case preferred. */
   h1, h2 {
-    font-family: var(--font-syne), 'Syne', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    font-weight: 800;
+    font-family: var(--font-satoshi), 'Satoshi', sans-serif;
+    text-transform: capitalize;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   /* INTER: SECONDARY FONT - Body copy, sub-headlines, data tables, UI
@@ -163,17 +171,17 @@
 
 /* Typography utilities */
 .font-headline {
-  font-family: 'Syne', sans-serif;
-  text-transform: uppercase;
+  font-family: var(--font-satoshi), 'Satoshi', sans-serif;
+  text-transform: capitalize;
   letter-spacing: -0.02em;
 }
 
 .font-body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
 }
 
 .font-mono {
-  font-family: 'DM Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
 }
 
 /* Data Module - Core B2B Component */
@@ -187,9 +195,14 @@
   background: #FFFFFF;
 }
 
-/* Accent top border for modules */
+/* Accent top border for modules - Flare */
 .module-accent-top {
   border-top: 2px solid #FF6B00;
+}
+
+/* Tech Teal accent hover */
+.accent-hover:hover {
+  color: #0eDDD2;
 }
 
 /* Section dividers */
@@ -245,7 +258,7 @@
 
 /* Label/Tag styles */
 .label-tag {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
@@ -255,14 +268,14 @@
 
 /* Metric display */
 .metric-value {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-satoshi), 'Satoshi', sans-serif;
   font-weight: 700;
   font-size: 32px;
   color: #111827;
 }
 
 .metric-label {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -338,11 +351,7 @@
   background-color: #F3F4F6;
 }
 
-/* Accent hover (for Electric Teal interactive elements) */
+/* Accent hover transition */
 .accent-hover {
   transition: color 150ms ease;
-}
-
-.accent-hover:hover {
-  color: #00D1FF;
 }
