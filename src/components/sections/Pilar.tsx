@@ -92,36 +92,36 @@ export function Pilar() {
             transition={{ duration: 0.4, delay: 0.15 + 0.08 * index }}
           >
             {/* Module Number & ID */}
-            <div className="lg:col-span-2 p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] bg-[#F3F4F6]">
-              <div className="font-[family-name:var(--font-satoshi)] text-[48px] font-bold text-[#E5E7EB] leading-none">
+            <div className="lg:col-span-2 p-5 sm:p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] bg-[#F3F4F6]">
+              <div className="font-[family-name:var(--font-satoshi)] text-[36px] sm:text-[48px] font-bold text-[#E5E7EB] leading-none">
                 {pilar.number}
               </div>
-              <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#FF6B00] mt-2">
+              <div className="font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-[#FF6B00] mt-2">
                 {pilar.name}
               </div>
             </div>
 
             {/* Headline & Description */}
-            <div className="lg:col-span-4 p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-[#E5E7EB]">
+            <div className="lg:col-span-4 p-5 sm:p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-[#E5E7EB]">
               {/* H3 - Inter, sentence case, semibold */}
-              <h3 className="font-[family-name:var(--font-inter)] text-lg font-semibold text-[#111827] mb-3 tracking-[-0.01em]">
+              <h3 className="font-[family-name:var(--font-inter)] text-base sm:text-lg font-semibold text-[#111827] mb-2 sm:mb-3 tracking-[-0.01em]">
                 {pilar.headline}
               </h3>
-              <p className="font-[family-name:var(--font-inter)] text-[14px] text-[#374151] leading-[1.6]">
+              <p className="font-[family-name:var(--font-inter)] text-[13px] sm:text-[14px] text-[#374151] leading-[1.6]">
                 {pilar.description}
               </p>
             </div>
 
             {/* Capabilities */}
-            <div className="lg:col-span-6 p-6 lg:p-8">
-              <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.15em] uppercase text-[#6B7280] mb-4">
+            <div className="lg:col-span-6 p-5 sm:p-6 lg:p-8">
+              <div className="font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-[#6B7280] mb-3 sm:mb-4">
                 Kemampuan
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {pilar.capabilities.map((cap, i) => (
                   <div 
                     key={i}
-                    className="font-[family-name:var(--font-inter)] text-[13px] text-[#374151] flex items-start gap-2"
+                    className="font-[family-name:var(--font-inter)] text-[12px] sm:text-[13px] text-[#374151] flex items-start gap-2"
                   >
                     <span className="text-[#FF6B00] flex-shrink-0 text-[10px] mt-1">→</span>
                     {cap}

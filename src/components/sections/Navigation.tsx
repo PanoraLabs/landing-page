@@ -43,7 +43,7 @@ export function Navigation() {
             alt="Panora"
             width={180}
             height={48}
-            className="h-12 w-auto"
+            className="h-10 sm:h-12 w-auto"
             priority
           />
         </a>
@@ -89,14 +89,14 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[57px] left-0 right-0 z-40 bg-[#F9FAFB] border-b border-[#E5E7EB] lg:hidden"
+            className="fixed top-[53px] sm:top-[57px] left-0 right-0 z-40 bg-[#F9FAFB] border-b border-[#E5E7EB] lg:hidden max-h-[calc(100vh-60px)] overflow-y-auto"
           >
-            <div className="flex flex-col p-5 gap-1">
+            <div className="flex flex-col p-4 sm:p-5 gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="font-[family-name:var(--font-inter)] text-[13px] font-medium tracking-[0.02em] text-[#6B7280] no-underline hover:text-[#111827] transition-colors py-3"
+                  className="font-[family-name:var(--font-inter)] text-[14px] sm:text-[13px] font-medium tracking-[0.02em] text-[#6B7280] no-underline hover:text-[#111827] transition-colors py-3"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -105,7 +105,7 @@ export function Navigation() {
               <a
                 href="#daftar"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center h-10 px-5 bg-[#FF6B00] text-white font-[family-inter] text-[11px] font-semibold tracking-[0.02em] no-underline hover:bg-[#E55F00] transition-colors duration-150 mt-3"
+                className="inline-flex items-center justify-center h-11 sm:h-10 px-5 bg-[#FF6B00] text-white font-[family-name:var(--font-inter)] text-[12px] sm:text-[11px] font-semibold tracking-[0.02em] no-underline hover:bg-[#E55F00] transition-colors duration-150 mt-3"
               >
                 Minta akses
               </a>

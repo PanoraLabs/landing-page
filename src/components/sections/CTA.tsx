@@ -56,7 +56,7 @@ export function CTA() {
                 href={type.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-between px-6 py-5 hover:bg-[#F3F4F6] transition-colors group ${
+                className={`flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 hover:bg-[#F3F4F6] transition-colors group ${
                   index !== accessTypes.length - 1 ? "border-b border-[#E5E7EB]" : ""
                 }`}
                 initial={{ opacity: 0, x: 10 }}
@@ -65,14 +65,14 @@ export function CTA() {
               >
                 <div>
                   {/* H3 - Inter, sentence case */}
-                  <h3 className="font-[family-name:var(--font-inter)] text-[13px] font-semibold text-[#111827] tracking-[-0.01em]">
+                  <h3 className="font-[family-name:var(--font-inter)] text-[12px] sm:text-[13px] font-semibold text-[#111827] tracking-[-0.01em]">
                     {type.label}
                   </h3>
-                  <div className="font-[family-name:var(--font-inter)] text-[12px] text-[#6B7280]">
+                  <div className="font-[family-name:var(--font-inter)] text-[11px] sm:text-[12px] text-[#6B7280]">
                     {type.desc}
                   </div>
                 </div>
-                <span className="font-[family-name:var(--font-inter)] text-[11px] text-[#FF6B00] opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="font-[family-name:var(--font-inter)] text-[10px] sm:text-[11px] text-[#FF6B00] opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-2">
                   Minta →
                 </span>
               </motion.a>
@@ -80,13 +80,13 @@ export function CTA() {
           </div>
 
           {/* Enterprise Contact */}
-          <div className="mt-6 border border-[#E5E7EB] px-6 py-4 bg-white">
-            <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#6B7280] mb-1">
+          <div className="mt-4 sm:mt-6 border border-[#E5E7EB] px-4 sm:px-6 py-3 sm:py-4 bg-white">
+            <div className="font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#6B7280] mb-1">
               Pertanyaan enterprise
             </div>
             <a 
               href="mailto:enterprise@panora.id"
-              className="font-[family-name:var(--font-inter)] text-[14px] text-[#111827] hover:text-[#FF6B00] transition-colors"
+              className="font-[family-name:var(--font-inter)] text-[13px] sm:text-[14px] text-[#111827] hover:text-[#FF6B00] transition-colors"
             >
               enterprise@panora.id
             </a>

@@ -119,22 +119,22 @@ export function Flow() {
         {flowSteps.map((step, index) => (
           <motion.div
             key={step.num}
-            className="border border-[#111827] bg-white"
+            className="border border-[#111827] bg-white mb-3 last:mb-0"
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, delay: 0.15 + 0.08 * index }}
           >
             <div className="grid grid-cols-12">
-              <div className="col-span-2 border-r border-[#E5E7EB] px-3 py-4 flex items-start justify-center bg-[#F9FAFB]">
-                <span className="font-[family-name:var(--font-satoshi)] text-xl font-bold text-[#111827]">
+              <div className="col-span-2 border-r border-[#E5E7EB] px-2 sm:px-3 py-4 flex items-start justify-center bg-[#F9FAFB]">
+                <span className="font-[family-name:var(--font-satoshi)] text-lg sm:text-xl font-bold text-[#111827]">
                   {step.num}
                 </span>
               </div>
-              <div className="col-span-10 px-4 py-4">
-                <h3 className="font-[family-name:var(--font-inter)] text-[13px] font-semibold text-[#111827] mb-1 tracking-[-0.01em]">
+              <div className="col-span-10 px-3 sm:px-4 py-4">
+                <h3 className="font-[family-name:var(--font-inter)] text-[12px] sm:text-[13px] font-semibold text-[#111827] mb-1 tracking-[-0.01em]">
                   {step.title}
                 </h3>
-                <p className="font-[family-name:var(--font-inter)] text-[12px] text-[#6B7280] leading-[1.5]">
+                <p className="font-[family-name:var(--font-inter)] text-[11px] sm:text-[12px] text-[#6B7280] leading-[1.5]">
                   {step.desc}
                 </p>
               </div>

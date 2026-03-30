@@ -105,45 +105,47 @@ export function Tech() {
           </p>
 
           {/* Tech Stack Table - Data module style */}
-          <div className="border border-[#374151]">
-            {/* Table Header */}
-            <div className="grid grid-cols-12 border-b border-[#374151] bg-[#1F2937]">
-              <div className="col-span-4 px-4 py-3 font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF]">
-                Kategori
+          <div className="border border-[#374151] overflow-x-auto">
+            <div className="min-w-[320px]">
+              {/* Table Header */}
+              <div className="grid grid-cols-12 border-b border-[#374151] bg-[#1F2937]">
+                <div className="col-span-4 px-3 sm:px-4 py-3 font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF]">
+                  Kategori
+                </div>
+                <div className="col-span-5 px-3 sm:px-4 py-3 font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] border-l border-[#374151]">
+                  Teknologi
+                </div>
+                <div className="col-span-3 px-3 sm:px-4 py-3 font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] border-l border-[#374151]">
+                  Status
+                </div>
               </div>
-              <div className="col-span-5 px-4 py-3 font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] border-l border-[#374151]">
-                Teknologi
-              </div>
-              <div className="col-span-3 px-4 py-3 font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] border-l border-[#374151]">
-                Status
-              </div>
-            </div>
 
-            {/* Table Rows */}
-            {techStack.map((tech, index) => (
-              <motion.div
-                key={tech.category}
-                className={`grid grid-cols-12 border-b border-[#374151] last:border-b-0 hover:bg-[#1F2937] transition-colors ${
-                  index % 2 === 0 ? "bg-[#111827]" : "bg-[#0F1419]"
-                }`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.1 * index, duration: 0.3 }}
-              >
-                <div className="col-span-4 px-4 py-3 font-[family-name:var(--font-inter)] text-[12px] text-[#9CA3AF]">
-                  {tech.category}
-                </div>
-                <div className="col-span-5 px-4 py-3 font-[family-name:var(--font-inter)] text-[13px] font-semibold text-white border-l border-[#374151]">
-                  {tech.technology}
-                </div>
-                <div className="col-span-3 px-4 py-3 border-l border-[#374151]">
-                  <span className="inline-flex items-center gap-2 font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#10B981]">
-                    <span className="w-1.5 h-1.5 bg-[#10B981]" />
-                    {tech.status}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+              {/* Table Rows */}
+              {techStack.map((tech, index) => (
+                <motion.div
+                  key={tech.category}
+                  className={`grid grid-cols-12 border-b border-[#374151] last:border-b-0 hover:bg-[#1F2937] transition-colors ${
+                    index % 2 === 0 ? "bg-[#111827]" : "bg-[#0F1419]"
+                  }`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.1 * index, duration: 0.3 }}
+                >
+                  <div className="col-span-4 px-3 sm:px-4 py-3 font-[family-name:var(--font-inter)] text-[11px] sm:text-[12px] text-[#9CA3AF]">
+                    {tech.category}
+                  </div>
+                  <div className="col-span-5 px-3 sm:px-4 py-3 font-[family-name:var(--font-inter)] text-[12px] sm:text-[13px] font-semibold text-white border-l border-[#374151]">
+                    {tech.technology}
+                  </div>
+                  <div className="col-span-3 px-3 sm:px-4 py-3 border-l border-[#374151]">
+                    <span className="inline-flex items-center gap-1.5 sm:gap-2 font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#10B981]">
+                      <span className="w-1.5 h-1.5 bg-[#10B981]" />
+                      {tech.status}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -162,21 +164,21 @@ export function Tech() {
           </div>
 
           {/* Metrics Grid */}
-          <div className="border border-[#374151] mb-8">
+          <div className="border border-[#374151] mb-6 sm:mb-8">
             <div className="grid grid-cols-2 divide-x divide-y divide-[#374151]">
               {networkMetrics.map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  className="px-5 py-6 hover:bg-[#1F2937] transition-colors"
+                  className="px-3 sm:px-5 py-4 sm:py-6 hover:bg-[#1F2937] transition-colors"
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.1 * index + 0.2, duration: 0.3 }}
                 >
-                  <div className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] mb-2">
+                  <div className="font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF] mb-2">
                     {metric.label}
                   </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-[family-name:var(--font-satoshi)] text-[28px] font-bold text-white tracking-[-0.02em]">
+                  <div className="flex items-baseline gap-1 sm:gap-2">
+                    <span className="font-[family-name:var(--font-satoshi)] text-[22px] sm:text-[28px] font-bold text-white tracking-[-0.02em]">
                       <AnimatedNumber 
                         value={metric.value} 
                         prefix={metric.prefix}
@@ -184,7 +186,7 @@ export function Tech() {
                         decimals={metric.decimals}
                       />
                     </span>
-                    <span className="font-[family-name:var(--font-inter)] text-xs text-[#6B7280]">
+                    <span className="font-[family-name:var(--font-inter)] text-[10px] sm:text-xs text-[#6B7280]">
                       {metric.unit}
                     </span>
                   </div>
@@ -194,20 +196,20 @@ export function Tech() {
           </div>
 
           {/* Live TPS Monitor - Data module style */}
-          <div className="border border-[#374151] p-6 bg-[#0F1419]">
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF]">
+          <div className="border border-[#374151] p-4 sm:p-6 bg-[#0F1419]">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <span className="font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#9CA3AF]">
                 Transaksi live
               </span>
-              <span className="flex items-center gap-2 font-[family-name:var(--font-inter)] text-[10px] tracking-[0.1em] uppercase text-[#10B981]">
+              <span className="flex items-center gap-1.5 sm:gap-2 font-[family-name:var(--font-inter)] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-[#10B981]">
                 <span className="w-1.5 h-1.5 bg-[#10B981] animate-pulse" />
                 Live
               </span>
             </div>
-            <div className="font-[family-name:var(--font-satoshi)] text-[48px] font-bold text-white leading-none tracking-[-0.02em]">
+            <div className="font-[family-name:var(--font-satoshi)] text-[36px] sm:text-[48px] font-bold text-white leading-none tracking-[-0.02em]">
               {currentTps.toLocaleString('id-ID')}
             </div>
-            <div className="font-[family-name:var(--font-inter)] text-[11px] text-[#6B7280] mt-2">
+            <div className="font-[family-name:var(--font-inter)] text-[10px] sm:text-[11px] text-[#6B7280] mt-2">
               Transaksi per detik
             </div>
           </div>
