@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SplashScreen } from "@/components/SplashScreen";
 
 const satoshi = localFont({
   src: [
@@ -57,7 +58,7 @@ export default function RootLayout({
       className={`${satoshi.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#F9FAFB] text-[#111827] overflow-x-hidden">
-        {children}
+        <SplashScreen>{children}</SplashScreen>
       </body>
     </html>
   );
