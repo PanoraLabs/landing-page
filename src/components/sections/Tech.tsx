@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const techStack = [
   { category: "Smart Contract", technology: "Anchor Framework", status: "Produksi" },
@@ -30,35 +30,44 @@ function AnimatedNumber({
   suffix?: string; 
   decimals?: number;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const count = useMotionValue(0);
-  const [displayValue, setDisplayValue] = useState("0");
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [displayValue, setDisplayValue] = useState(value);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, value, {
-        duration: 2,
-        ease: "easeOut",
-      });
-      return controls.stop;
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+      const duration = 1500;
+      const startTime = Date.now();
+      const startValue = 0;
+      
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out cubic
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = startValue + (value - startValue) * easeOut;
+        
+        setDisplayValue(current);
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      
+      requestAnimationFrame(animate);
     }
-  }, [isInView, value, count]);
+  }, [isInView, value, hasAnimated]);
 
-  useEffect(() => {
-    const unsubscribe = count.on("change", (latest) => {
-      if (decimals > 0) {
-        setDisplayValue(latest.toFixed(decimals));
-      } else {
-        setDisplayValue(Math.round(latest).toLocaleString("id-ID"));
-      }
-    });
-    return unsubscribe;
-  }, [count, decimals]);
+  const formattedValue = decimals > 0 
+    ? displayValue.toFixed(decimals)
+    : Math.round(displayValue).toLocaleString("id-ID");
 
   return (
     <span ref={ref}>
-      {prefix}{displayValue}{suffix}
+      {prefix}{formattedValue}{suffix}
     </span>
   );
 }

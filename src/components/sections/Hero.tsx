@@ -3,11 +3,8 @@
 import {
   motion,
   useInView,
-  useMotionValue,
-  useTransform,
-  animate,
 } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const heroStats = [
   { num: 34, suffix: "", label: "Provinsi" },
@@ -43,43 +40,48 @@ function AnimatedNumber({
   suffix?: string;
   decimals?: number;
 }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => {
-    if (decimals > 0) {
-      return latest.toFixed(decimals);
-    }
-    return Math.round(latest).toLocaleString("id-ID");
-  });
-  const [displayValue, setDisplayValue] = useState("0");
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [displayValue, setDisplayValue] = useState(value);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, value, {
-        duration: 2,
-        ease: "easeOut",
-      });
-      return controls.stop;
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+      const duration = 1500;
+      const startTime = Date.now();
+      const startValue = 0;
+      
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Ease out cubic
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = startValue + (value - startValue) * easeOut;
+        
+        setDisplayValue(current);
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      
+      requestAnimationFrame(animate);
     }
-  }, [isInView, value, count]);
+  }, [isInView, value, hasAnimated]);
 
-  useEffect(() => {
-    const unsubscribe = rounded.on("change", (latest) => {
-      setDisplayValue(String(latest));
-    });
-    return unsubscribe;
-  }, [rounded]);
+  const formattedValue = decimals > 0 
+    ? displayValue.toFixed(decimals)
+    : Math.round(displayValue).toLocaleString("id-ID");
 
   return (
     <span ref={ref}>
-      {displayValue}
+      {formattedValue}
       {suffix}
     </span>
   );
 }
-
-import { useState } from "react";
 
 export function Hero() {
   return (
